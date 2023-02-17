@@ -1,28 +1,23 @@
 pipeline {
     agent any
-
-stages{
-  stage('Build') {
-    steps{
-      sh 'g++ -o PES2UG20CS367 PES2UG20CS367_TanyaArora.cpp'
+    stages {
+        stage('Build') {
+            steps {
+                sh 'g++ -o PES2UG20CS367-1 PES2UG20CS367_TanyaArora.cpp'
+                echo "Build Successful"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './PES2UG20CS367-1'
+            }
+        }
     }
-  }
-
-  stage('Test') {
-    steps{
-       sh './PES2UG20CS367'
+    post {
+        always {
+            echo 'Pipeline completed'
+        }
+        failure {
+            echo 'Pipeline failed'
+        }
     }
-  }
-
-  stage('Deploy') {
-//     steps{
-      echo 'DEPLOYMENT SUCCESSFUL'
-    }
-  }
-}
-post {
-    failure {
-        echo 'Pipeline Failed'
-    }
-  }
-}
