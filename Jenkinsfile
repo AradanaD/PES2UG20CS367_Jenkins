@@ -4,7 +4,7 @@ pipeline {
 stages{
   stage('Build') {
     steps{
-      sh 'g++ -o PES2UG20CS367 PES2UG20CS367.cpp'
+        sh 'g++ -o PES2UG20CS367 PES2UG20CS367.cpp'
     }
   }
 
@@ -15,14 +15,17 @@ stages{
   }
 
   stage('Deploy') {
-//     steps{
-      echo 'DEPLOYMENT SUCCESSFUL'
+    steps{
+      echo 'DEPLOYMENT SUCCESSFUL FROM GITHUB REPO - PES2UG20CS367_Jenkins'
     }
   }
 }
 post {
+    always {
+      echo 'Pipeline was completed'
+    }
     failure {
-        echo 'Pipeline Failed'
+        echo 'Pipeline has Failed'
     }
   }
 }
